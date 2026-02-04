@@ -34,7 +34,7 @@ const devMode = true;
 
 
 const drawViz = (data) => {
-  console.log('data', data);
+  debugLog('data', data);
   // Clear the body
   document.body.innerHTML = '';
 
@@ -45,8 +45,8 @@ const drawViz = (data) => {
 
   // Get the dimension config id, field id and name.
   const dimConfigId = 'dim';
-  console.log('data.fields', data.fields);
-  console.log('data.fields[dimConfigId]', data.fields[dimConfigId]);
+  debugLog('data.fields', data.fields);
+  debugLog('data.fields[dimConfigId]', data.fields[dimConfigId]);
   const dimField = data.fields[dimConfigId][0];
   const dimFieldId = dimField.id;
   const dimName = dimField.name;
@@ -98,9 +98,24 @@ const drawViz = (data) => {
 
   // Get selected values
   let selectedValues = [];
-  if (data.interactions.filter && data.interactions.filter.value && data.interactions.filter.value.values) {
-    selectedValues = data.interactions.filter.value.values.map(v => v[0]);
+  if (data.interactions && data.interactions.filter) {
+    const filterInteraction = data.interactions.filter;
+    debugLog('Inspecting filter interaction object:', JSON.stringify(filterInteraction, null, 2));
+
+    // Path from user's log: filter.value.data.values
+    if (filterInteraction.value && filterInteraction.value.data && filterInteraction.value.data.values) {
+      selectedValues = filterInteraction.value.data.values.map(v => v[0]);
+    }
+    // Standard path from docs: filter.value.values
+    else if (filterInteraction.value && filterInteraction.value.values) {
+      selectedValues = filterInteraction.value.values.map(v => v[0]);
+    }
+    // Another fallback: filter.values
+    else if (filterInteraction.values) {
+      selectedValues = filterInteraction.values.map(v => v[0]);
+    }
   }
+  debugLog('Selected values:', selectedValues);
 
   // Draw items
   data.tables.DEFAULT.forEach(row => {
@@ -110,9 +125,10 @@ const drawViz = (data) => {
     item.className = 'item';
     const dimValue = row[dimConfigId][0];
     item.textContent = dimValue === null ? '(empty)' : dimValue;
+    debugLog('Dimension value:', dimValue);
 
     // Set selection state
-    if (selectedValues.includes(dimValue)) {
+    if (selectedValues.map(String).includes(String(dimValue))) {
       item.classList.add('selected');
     } else {
       item.classList.add('not-selected');
@@ -120,34 +136,30 @@ const drawViz = (data) => {
 
     // Handle click
     item.addEventListener('click', (event) => {
+      const isSelected = selectedValues.map(String).includes(String(dimValue));
       let newSelectedValues;
 
-      const isSelected = selectedValues.includes(dimValue);
+      // Default behavior: toggle selection.
+      // This is used if multi-select does not require CTRL, or if CTRL is pressed.
+      const toggle = !requireCtrlToMultiSelect || event.ctrlKey;
 
-      if (requireCtrlToMultiSelect) {
-        if (event.ctrlKey) {
-          // Toggle selection for the clicked item
-          if (isSelected) {
-            newSelectedValues = selectedValues.filter(v => v !== dimValue);
-          } else {
-            newSelectedValues = [...selectedValues, dimValue];
-          }
-        } else {
-          // Select only the clicked item
-          if (isSelected && selectedValues.length === 1) {
-            newSelectedValues = [];
-          } else {
-            newSelectedValues = [dimValue];
-          }
-        }
-      } else {
-        // Toggle selection for the clicked item
+      if (toggle) {
         if (isSelected) {
-          newSelectedValues = selectedValues.filter(v => v !== dimValue);
+          newSelectedValues = selectedValues.filter(v => String(v) !== String(dimValue));
         } else {
           newSelectedValues = [...selectedValues, dimValue];
         }
+      } else {
+        // If multi-select requires CTRL and it's not pressed, this is a single-select action.
+        // If it's already selected and it's the only one, deselect it. Otherwise, select just this one.
+        if (isSelected && selectedValues.length === 1) {
+          newSelectedValues = [];
+        } else {
+          newSelectedValues = [dimValue];
+        }
       }
+
+      debugLog('New selected values:', newSelectedValues);
 
       const newFilter = { concepts: [dimFieldId], values: newSelectedValues.map(v => [v]) };
       dscc.sendInteraction('filter', 'FILTER', newFilter);

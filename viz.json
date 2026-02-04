@@ -65,8 +65,8 @@
       "elements": [
         {
           "id": "requireCtrlToMultiSelect",
-          "label": "Required ctrl for select multiple. (qlikview)",
-          "type": "BOOLEAN",
+          "label": "Require ctrl for select multiple. (qlikview)",
+          "type": "CHECKBOX",
           "defaultValue": false
         }
       ]
