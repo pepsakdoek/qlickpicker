@@ -18,6 +18,8 @@ body {
   border-bottom: 1px solid #ccc;
   background-color: #f0f0f0;
   font-weight: bold;
+  position: relative; /* z-index requires a position other than static */
+  z-index: 10;
 }
 
 #clear-button {
@@ -26,7 +28,6 @@ body {
 }
 
 #container {
-  flex-grow: 1;
   overflow: auto;
   display: flex; /* keep this from original */
 }
@@ -39,7 +40,7 @@ body {
 }
 
 .item.selected {
-  background-color: #A5D6A7; /* Light Green */
+  background-color: #7cf880; /* Light Green */
 }
 
 .item.not-selected {

@@ -45,7 +45,7 @@
           "id": "fillLeftToRight",
           "label": "Fill setting",
           "type": "SELECT_SINGLE",
-          "defaultValue": "L2RTB",
+          "defaultValue": "L2RTD",
           "options": [
             {
               "label": "Left to right, then top to bottom",
@@ -56,6 +56,18 @@
               "value": "T2BLR"
             }
           ]
+        }
+      ]
+    },
+    { 
+      "id": "behaviour",
+      "label": "Behaviour Settings",
+      "elements": [
+        {
+          "id": "requireCtrlToMultiSelect",
+          "label": "Required ctrl for select multiple. (qlikview)",
+          "type": "BOOLEAN",
+          "defaultValue": false
         }
       ]
     }
