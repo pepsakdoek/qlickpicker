@@ -16,5 +16,54 @@
       ]
     }
   ],
-  "style": []
+  "style": [
+    {
+      "id": "layout",
+      "label": "Layout Settings",
+      "elements": [
+        {
+          "id": "layoutSelect",
+          "label": "How to display Dimension",
+          "type": "SELECT_SINGLE",
+          "defaultValue": "AUTO",
+          "options": [
+            {
+              "label": "Automatic",
+              "value": "AUTO"
+            },
+            {
+              "label": "Force 1 Column",
+              "value": "FORCE_COL1"
+            },
+            {
+              "label": "Force 1 Row",
+              "value": "FORCE_ROW1"
+            }
+          ]
+        },
+        {
+          "id": "fillLeftToRight",
+          "label": "Fill setting",
+          "type": "SELECT_SINGLE",
+          "defaultValue": "L2RTB",
+          "options": [
+            {
+              "label": "Left to right, then top to bottom",
+              "value": "L2RTD"
+            },
+            {
+              "label": "Top to bottom, then left to right",
+              "value": "T2BLR"
+            }
+          ]
+        }
+      ]
+    },
+  ],
+  "interactions": [
+    {
+      "id": "filter",
+      "supportedActions": ["FILTER"]
+    }
+  ]
 }

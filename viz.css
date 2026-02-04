@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+#container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.item {
+  padding: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.item.selected {
+  background-color: #A5D6A7; /* Light Green */
+}
+
+.item.not-selected {
+  background-color: #FFFFFF; /* White */
+}
