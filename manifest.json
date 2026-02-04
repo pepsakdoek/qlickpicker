@@ -15,9 +15,9 @@
       "description": "A Qlickview type selector for Looker Studio",
       "iconUrl": "https://storage.googleapis.com/qlickpicker/qlikviewlogo.png",
       "resource": {
-        "js": "gs://custompivot/qlickpicker/viz.js",
-        "config": "gs://custompivot/qlickpicker/viz.json",
-        "css": "gs://custompivot/qlickpicker/viz.css"
+        "js": "gs://qlickpicker/viz.js",
+        "config": "gs://qlickpicker/viz.json",
+        "css": "gs://qlickpicker/viz.css"
       }
     }
   ]
