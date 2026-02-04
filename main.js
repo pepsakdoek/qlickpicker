@@ -4,7 +4,7 @@ function debugLog(...args) {
         console.log(...args);
     }
 }
-const devMode = true;
+const devMode = false;
 
 
 const drawViz = (data) => {
