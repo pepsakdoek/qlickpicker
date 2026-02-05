@@ -15,7 +15,7 @@
       "description": "A qlikview type selector for Looker Studio",
       "iconUrl": "https://storage.googleapis.com/qlikpicker/qlikviewlogo.png",
       "resource": {
-        "js": "gs://qlikpicker/qlikpicker.js",
+        "js": "gs://qlikpicker/qlikpickerviz.js",
         "config": "gs://qlikpicker/qlikpickerviz.json",
         "css": "gs://qlikpicker/qlikpickerviz.css"
       }
