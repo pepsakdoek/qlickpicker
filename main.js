@@ -1,4 +1,3 @@
-
 function debugLog(...args) {
     if (devMode) {
         console.log(...args);
@@ -10,20 +9,19 @@ const devMode = true;
 const drawViz = (data) => {
   debugLog('data', data);
 
+  // Remove previous custom CSS
+  const existingCustomCSS = document.getElementById('qlikpicker-custom-css');
+  if (existingCustomCSS) {
+    existingCustomCSS.remove();
+  }
+
   // Inject custom CSS
-  const customCSS = data.style.advcss ? data.style.advcss.value : '';
-  let styleElement = document.getElementById('custom-viz-css');
-  
+  const customCSS = data.style.advcss ? data.style.advcss.value : false;
   if (customCSS) {
-    if (!styleElement) {
-      styleElement = document.createElement('style');
-      styleElement.id = 'custom-viz-css';
-      document.head.appendChild(styleElement);
-    }
-    styleElement.innerHTML = customCSS;
-  } else if (styleElement) {
-    // If there's no custom CSS, remove the style element
-    styleElement.parentElement.removeChild(styleElement);
+    const style = document.createElement('style');
+    style.id = 'qlikpicker-custom-css';
+    style.innerHTML = customCSS;
+    document.head.appendChild(style);
   }
 
   // Clear the body
