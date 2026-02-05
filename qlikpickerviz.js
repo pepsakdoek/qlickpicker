@@ -30,11 +30,20 @@ function debugLog(...args) {
         console.log(...args);
     }
 }
-const devMode = true;
+const devMode = false;
 
 
 const drawViz = (data) => {
   debugLog('data', data);
+
+  // Inject custom CSS
+  const customCSS = data.style.advcss ? data.style.advcss.value : false;
+  if (customCSS) {
+    const style = document.createElement('style');
+    style.innerHTML = customCSS;
+    document.head.appendChild(style);
+  }
+
   // Clear the body
   document.body.innerHTML = '';
 
@@ -54,14 +63,17 @@ const drawViz = (data) => {
   // Create a header for the dimension name and clear button
   const header = document.createElement('div');
   header.id = 'header';
+  header.classList.add('qlikpicker-header');
 
   const dimNameSpan = document.createElement('span');
   dimNameSpan.textContent = dimName;
+  dimNameSpan.classList.add('qlikpicker-dim-name');
   header.appendChild(dimNameSpan);
 
   const clearButton = document.createElement('div');
   clearButton.id = 'clear-button';
-  clearButton.innerHTML = '&#x1F58D;'; // Eraser icon
+  clearButton.classList.add('qlikpicker-clear-button');
+  clearButton.innerHTML = '&#x1F4FC;'; // Eraser icon
   header.appendChild(clearButton);
 
   clearButton.addEventListener('click', () => {
@@ -74,6 +86,7 @@ const drawViz = (data) => {
   // Create a container for the items
   const container = document.createElement('div');
   container.id = 'container';
+  container.classList.add('qlikpicker-container');
   document.body.appendChild(container);
 
   // Get style settings
@@ -122,7 +135,7 @@ const drawViz = (data) => {
     if (!row) return; // Skip if row is null or undefined
 
     const item = document.createElement('div');
-    item.className = 'item';
+    item.className = 'item qlikpicker-item';
     const dimValue = row[dimConfigId][0];
     item.textContent = dimValue === null ? '(empty)' : dimValue;
     debugLog('Dimension value:', dimValue);

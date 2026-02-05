@@ -70,6 +70,18 @@
           "defaultValue": false
         }
       ]
+    },
+    {
+      "id": "customcss",
+      "label": "Custom CSS",
+      "elements": [
+        {
+          "id": "advcss",
+          "label": "Add CSS Rules",
+          "type": "TEXTAREA",
+          "defaultValue": ""
+        }
+      ]
     }
   ],
   "interactions": [
