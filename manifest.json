@@ -1,8 +1,8 @@
 {
-  "name": "QlickPicier",
+  "name": "qlikPicker",
   "organization": "Pep",
-  "description": "Qlickview type selector",
-  "logoUrl": "https://storage.googleapis.com/qlickpicker/qlikviewlogo.png",
+  "description": "Qlikview type selector",
+  "logoUrl": "https://storage.googleapis.com/qlikpicker/qlikviewlogo.png",
   "packageUrl": "https://github.com/pepsakdoek/qlickpicker",
   "supportUrl": "https://github.com/pepsakdoek/qlickpicker/wiki",
   "privacyPolicyUrl": "https://github.com/pepsakdoek/qlickpicker/wiki/Privacy",
@@ -10,14 +10,14 @@
   "devMode": false,
   "components": [
     {
-      "id": "qlickpicker",
-      "name": "QlickPicker",
-      "description": "A Qlickview type selector for Looker Studio",
-      "iconUrl": "https://storage.googleapis.com/qlickpicker/qlikviewlogo.png",
+      "id": "qlikpicker",
+      "name": "qlikPicker",
+      "description": "A qlikview type selector for Looker Studio",
+      "iconUrl": "https://storage.googleapis.com/qlikpicker/qlikviewlogo.png",
       "resource": {
-        "js": "gs://qlickpicker/viz.js",
-        "config": "gs://qlickpicker/viz.json",
-        "css": "gs://qlickpicker/viz.css"
+        "js": "gs://qlikpicker/qlikpicker.js",
+        "config": "gs://qlikpicker/qlikpickerviz.json",
+        "css": "gs://qlikpicker/qlikpickerviz.css"
       }
     }
   ]
