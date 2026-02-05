@@ -79,7 +79,7 @@ const drawViz = (data) => {
   const clearButton = document.createElement('div');
   clearButton.id = 'clear-button';
   clearButton.classList.add('qlikpicker-clear-button');
-  clearButton.innerHTML = '&#x1F4FC;'; // Eraser icon
+  clearButton.innerHTML = '&#x1F5D1;'; // Wastebasket icon (I can't find a good one)
   header.appendChild(clearButton);
 
   clearButton.addEventListener('click', () => {
